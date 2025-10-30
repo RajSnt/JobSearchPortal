@@ -89,6 +89,11 @@ public class ApplyDS extends JFrame implements ActionListener{
         setVisible(true);
     }
     public void actionPerformed(ActionEvent ae){
+        if(ae.getSource()==back){
+            setVisible(false);
+            new ApplicantLanding("").setVisible(true);
+            return;
+        }
         String position = "";
         String username = un;
         String stat = "Applied";
@@ -124,11 +129,6 @@ public class ApplyDS extends JFrame implements ActionListener{
                 } else {
                     JOptionPane.showMessageDialog(null, "No data found for this applicant number in apinfo2.");
                 }
-            }
-
-            if(ae.getSource()==back){
-                setVisible(false);
-                new Search1("").setVisible(true);
             }
         } catch (Exception e) {
             e.printStackTrace();

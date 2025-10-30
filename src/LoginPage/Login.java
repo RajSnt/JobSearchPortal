@@ -1,6 +1,7 @@
 package LoginPage;
 
 import Applicant.*;
+import Recruiter.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -75,7 +76,6 @@ public class Login extends JFrame implements ActionListener {
 
             try {
                 ConnL c = new ConnL();
-
                 String query = "SELECT * FROM LoginDetails WHERE username='" + un + "' AND pass='" + pass + "'";
                 ResultSet rs = c.s.executeQuery(query);
 
@@ -92,6 +92,24 @@ public class Login extends JFrame implements ActionListener {
 
         }
         else if(ae.getSource()==Log2){
+            String username = User.getText();
+            String password = String.valueOf(Pass.getPassword());
+
+            try {
+                ConnL c = new ConnL();
+                String query = "SELECT * FROM Recruiters WHERE usernameR='" + username + "' AND passR='" + password + "'";
+                ResultSet rs = c.s.executeQuery(query);
+
+                if(rs.next()) {
+                    setVisible(false);
+                    new RecruiterLanding(username).setVisible(true);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Recruiter does not exist or password is incorrect");
+                }
+            } catch(Exception e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
+            }
 
         }
     }

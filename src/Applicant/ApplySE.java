@@ -2,7 +2,6 @@ package Applicant;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public class ApplySE extends JFrame implements ActionListener{
@@ -91,8 +90,13 @@ public class ApplySE extends JFrame implements ActionListener{
         setVisible(true);
     }
     public void actionPerformed(ActionEvent ae) {
-        String position = "";
+        if(ae.getSource()==back){
+            setVisible(false);
+            new ApplicantLanding("").setVisible(true);
+            return;
+        }
         String username = un;
+        String position = "";
         String stat = "Applied";
         if (ae.getSource() == ApplySDE) {
             position = "Software Developer";
@@ -128,10 +132,6 @@ public class ApplySE extends JFrame implements ActionListener{
                 }
             }
 
-            if(ae.getSource()==back){
-                setVisible(false);
-                new Search1("").setVisible(true);
-            }
         } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
